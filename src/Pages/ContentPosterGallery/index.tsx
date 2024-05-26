@@ -17,6 +17,7 @@ const InfiniteScrollExample1 = () => {
   const [filteredContentList, setFilteredContentList] = useState<any>([]);
   const [contentTitle, setContentTitle] = useState('');
   const [width, setWidth] = useState(window.innerWidth);
+  const [height, setHeight] = useState(window.innerHeight);
 
   const fetchData = async () => {
     setIsContentLoading(true);
@@ -57,23 +58,32 @@ const InfiniteScrollExample1 = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, [isContentLoading]); // Re-add event listener if loading state changes
 
-  // const handleContentSearch = (event: any) => {
-  //   const searchText = event.target.value.toLowerCase().trim();
-  //   modifyRenderList(searchText);
-  // };
+  const handleContentSearch = (event: any) => {
+    const searchText = event.target.value.toLowerCase().trim();
+    modifyRenderList(searchText);
+  };
 
-  // const modifyRenderList = (searchText: string) => {
-  //   const filteredItems = ContentItems.filter(
-  //     (item: any) => item.name.toLowerCase().includes(searchText),
-  //   );
-  //   setFilteredContentList(filteredItems);
-  // };
+  const modifyRenderList = (searchText: string) => {
+    const filteredItems = ContentItems.filter(
+      (item: any) => item.name.toLowerCase().includes(searchText),
+    );
+    setFilteredContentList(filteredItems);
+  };
 
-  const truncateString = (str: string) => (str.length > width / 30 ? `${str.slice(0, width / 30)}...` : str);
+  const truncateString = (contentName: string) => {
+    // handling content string based on window size
+    if (width < height) {
+      // portrait
+      return contentName.length > width / 20 ? `${contentName.slice(0, width / 30)}...` : contentName;
+    }
+    // landscape
+    return contentName.length > width / 40 ? `${contentName.slice(0, width / 40)}...` : contentName;
+  };
 
   useEffect(() => {
     const handleResize = () => {
       setWidth(window.innerWidth);
+      setHeight(window.innerHeight);
     };
 
     window.addEventListener('resize', handleResize);
@@ -84,12 +94,9 @@ const InfiniteScrollExample1 = () => {
     };
   }, []);
 
-  console.log({ width });
-
   return (
     <>
-      {/* <Input size="large" onChange={handleContentSearch} placeholder="large size" /> */}
-      <NavBar title={contentTitle} />
+      <NavBar handleContentSearch={handleContentSearch} title={contentTitle} />
 
       <div style={{ overflowY: 'auto', marginTop: 60 }}>
         {filteredContentList.length ? (

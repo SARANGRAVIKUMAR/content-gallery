@@ -5,10 +5,11 @@ import backIcon from '../../Assets/icons/Back.png';
 import searchIcon from '../../Assets/icons/search.png';
 
 interface NavbarProps {
-  title: string
+  title: string,
+  handleContentSearch: any
 }
 
-const NavBar = ({ title }: NavbarProps) => {
+const NavBar = ({ title, handleContentSearch }: NavbarProps) => {
   const [scrolled, setScrolled] = useState(false);
   const [showSearchIcon, setShowSearchIcon] = useState(true);
 
@@ -64,7 +65,7 @@ const NavBar = ({ title }: NavbarProps) => {
                 </Button>
               ) : (
                 <>
-                  <Input size="middle" allowClear placeholder="large size" />
+                  <Input size="middle" onChange={handleContentSearch} allowClear placeholder="Search Content" />
                   <Button type="text" onClick={toggleSearchBarDisplay} className="navButton">
                     Cancel
                   </Button>
