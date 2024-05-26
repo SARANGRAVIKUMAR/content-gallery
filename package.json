@@ -15,6 +15,7 @@
     "antd": "^5.17.3",
     "axios": "^0.21.1",
     "craco-less": "~1.15.0",
+    "gh-pages": "^6.1.1",
     "lodash.debounce": "^4.0.8",
     "mobx": "^6.3.2",
     "mobx-react": "^7.2.0",
@@ -30,6 +31,7 @@
     "build": "env-cmd -f .env.dev craco build",
     "build:prod": "env-cmd -f .env.prod craco build",
     "deploy": "gh-pages -d build",
+    "predeploy":"npm run build",
     "test": "craco test",
     "lint": "eslint . --ext .ts",
     "eject": "react-scripts eject"
@@ -52,7 +54,7 @@
       "last 1 safari version"
     ]
   },
-  "homepage": "https://github.com/SARANGRAVIKUMAR.github.io/content-gallery",
+  "homepage": "https://sarangravikumar.github.io/content-gallery/",
   "devDependencies": {
     "@types/lodash.debounce": "^4.0.6",
     "@typescript-eslint/eslint-plugin": "^4.29.1",
