@@ -2,6 +2,10 @@
 *{
    scrollbar-width: none;
 }
+.ant-btn-text:hover {
+    color: white !important;                
+    background-color: transparent;
+  }
 
 body {
     background-color: #171717;
