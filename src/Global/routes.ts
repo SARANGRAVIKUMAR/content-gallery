@@ -1,6 +1,5 @@
 const Routes = {
   home: '/',
-  landing: '/home',
   pageNotFound: '/404',
 };
 

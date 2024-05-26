@@ -40,9 +40,10 @@ const InfiniteScrollExample1 = () => {
 
   // function to handle scroll event
   const handleScroll = () => {
+    const scrollPercentage = (window.scrollY
+      / (document.documentElement.scrollHeight - window.innerHeight)) * 100;
     if (
-      window.innerHeight + document.documentElement.scrollTop
-      !== document.documentElement.offsetHeight
+      scrollPercentage < 80
       || isContentLoading
       || ContentItems.length >= totalContents
     ) {

@@ -7,7 +7,6 @@ import './App.less';
 import {
   BrowserRouter as Router,
 } from 'react-router-dom';
-import { QueryClientProvider, QueryClient } from 'react-query';
 import ApplicationRoutes from './routing/ApplicationRoutes';
 
 const App = () => (

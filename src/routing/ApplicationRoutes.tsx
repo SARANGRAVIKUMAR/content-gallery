@@ -3,28 +3,20 @@
 /* eslint-disable react/react-in-jsx-scope */
 import { Skeleton } from 'antd';
 import React, { Suspense } from 'react';
-import { Redirect, Route, Switch } from 'react-router-dom';
+import { Route } from 'react-router-dom';
 import Routes from '../Global/routes';
 
-const Home = React.lazy(() => import('../Pages/ContentPosterGallery'));
+const ContentPosterGallery = React.lazy(() => import('../Pages/ContentPosterGallery'));
 
-const Router = () => {
-  console.log('inside router');
-  return (
-    <Suspense fallback={<Skeleton />}>
-      <Switch>
-        <Route exact path="/">
-          <Redirect to={Routes.landing} />
-        </Route>
-        <Route
-          exact
-          path={Routes.landing}
-          render={() => (<Home />)}
-        />
+const Router = () => (
+  <Suspense fallback={<Skeleton />}>
+    <Route
+      exact
+      path={Routes.home}
+      render={() => (<ContentPosterGallery />)}
+    />
 
-      </Switch>
-    </Suspense>
-  );
-};
+  </Suspense>
+);
 
 export default Router;
