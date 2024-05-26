@@ -52,7 +52,7 @@ const NavBar = ({ title, handleContentSearch }: NavbarProps) => {
             >{title}
             </span>
           </div>
-          <div className={`${!showSearchIcon && 'abcd'} navBarContents-right`}>
+          <div className={`${!showSearchIcon && 'navBarContents-toggleView'} navBarContents-right`}>
             {
               showSearchIcon ? (
                 <Button type="text" onClick={toggleSearchBarDisplay} className="navButton">

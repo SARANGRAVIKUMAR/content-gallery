@@ -16,15 +16,21 @@ const ContentPosterGallery = () => {
   const [totalContents, setTotalContents] = useState(Constants.defaultPageSize);
   const [filteredContentList, setFilteredContentList] = useState<any>([]);
   const [contentTitle, setContentTitle] = useState('');
+  const [searchItem, setSearchItem] = useState('');
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
   const cardRef = useRef<any>();
 
   useEffect(() => {
-    // Page scroll to top on every reload
-    window.onload = () => {
+    // page scrolls to the top before it reloads
+    window.onbeforeunload = function () {
       window.scrollTo(0, 0);
     };
+
+    window.history.scrollRestoration = 'manual';
+
+    // Cleanup function
     return () => {
-      window.onload = null;
+      window.onbeforeunload = null;
     };
   }, []);
 
@@ -35,14 +41,22 @@ const ContentPosterGallery = () => {
       setContentItems((prevItems: any) => [...prevItems, ...response?.data?.page['content-items'].content]);
       setCurrentPage((prevPage) => prevPage + 1);
       setTotalContents(response?.data?.page['total-content-items']);
-      setFilteredContentList((prevItems: any) => [...prevItems, ...response?.data?.page['content-items'].content]);
       setContentTitle(response?.data?.page?.title);
+      if (searchItem) {
+        console.log('45');
+        modifyRenderList(searchItem);
+      } else {
+        console.log('insdie else');
+        setFilteredContentList((prevItems: any) => [...prevItems, ...response?.data?.page['content-items'].content]);
+      }
     } catch (error) {
       console.log({ error });
     } finally {
       setIsContentLoading(false);
     }
   };
+
+  console.log({ filteredContentList });
 
   useEffect(() => {
     fetchData();
@@ -67,10 +81,11 @@ const ContentPosterGallery = () => {
   useEffect(() => {
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
-  }, [isContentLoading]); // Re-add event listener if loading state changes
+  }, [isContentLoading, searchItem]); // Re-add event listener if loading state changes
 
   const handleContentSearch = (event: any) => {
     const searchText = event.target.value.toLowerCase().trim();
+    setSearchItem(searchText);
     modifyRenderList(searchText);
   };
 
@@ -81,10 +96,22 @@ const ContentPosterGallery = () => {
     setFilteredContentList(filteredItems);
   };
 
-  const truncateString = (contentName: string) => {
-    const maxWidth = cardRef?.current?.clientWidth;
-    return contentName.length > maxWidth / 10 ? `${contentName.slice(0, maxWidth / 10)}...` : contentName;
-  };
+  console.log({ windowWidth });
+
+  const truncateString = (str: string) => (str.length > windowWidth / 30 ? `${str.slice(0, windowWidth / 30)}...` : str);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setWindowWidth(window.innerWidth);
+    };
+
+    window.addEventListener('resize', handleResize);
+
+    // Cleanup event listener on component unmount
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
 
   return (
     <>

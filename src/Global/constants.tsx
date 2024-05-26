@@ -3,7 +3,7 @@ const Constants = {
   defaultPageSize: 10,
   baseUrl: 'https://test.create.diagnal.com',
   debounceSeconds: 1000,
-  scrollEventTriggerEventPercentage: 80,
+  scrollEventTriggerEventPercentage: 50,
 };
 
 export default Constants;
