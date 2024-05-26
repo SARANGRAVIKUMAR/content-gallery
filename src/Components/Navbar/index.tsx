@@ -64,7 +64,7 @@ const NavBar = ({ title, handleContentSearch }: NavbarProps) => {
                 </Button>
               ) : (
                 <>
-                  <Input size="middle" onChange={handleContentSearch} allowClear placeholder="Search Content" />
+                  <Input maxLength={20} size="middle" onChange={handleContentSearch} allowClear placeholder="Search Content" />
                   <Button type="text" onClick={toggleSearchBarDisplay} className="navButton">
                     Cancel
                   </Button>
