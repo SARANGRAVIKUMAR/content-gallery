@@ -27,8 +27,8 @@
     "web-vitals": "^1.0.1"
   },
   "scripts": {
-    "start": "env-cmd -f .env.local craco start",
-    "build": "env-cmd -f .env.dev craco build",
+    "start": "craco start",
+    "build": "craco build",
     "build:prod": "env-cmd -f .env.prod craco build",
     "deploy": "gh-pages -d build",
     "predeploy":"npm run build",
