@@ -54,7 +54,6 @@
       "last 1 safari version"
     ]
   },
-  "homepage": "https://sarangravikumar.github.io/",
   "devDependencies": {
     "@types/lodash.debounce": "^4.0.6",
     "@typescript-eslint/eslint-plugin": "^4.29.1",
