@@ -15,11 +15,11 @@
     width: 100%;
     
 }
-  .stillScrollBar {
+  .solidColorNavBar {
     background: rgb(0,0,0);
     background: linear-gradient(180deg, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 1) 100%, rgba(0, 0, 0, 0) 100%);
   }
-  .scrolled{
+  .bluredNavBar{
     background: rgb(0,0,0);
     background: linear-gradient(180deg, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 1) 80%, rgba(0, 0, 0, 0.1) 100%);
   }
@@ -31,6 +31,22 @@
     color: white;
     padding: 10;
   }
+  .navBarContents{
+    display:  flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .navBarContents-left{
+    display: flex;
+    gap: 5;
+    align-items: center;
+  }
+
+  .navBarContents-right{
+    display: flex;
+    align-items: center;
+  }
   
   .title {
     font-size: 22px;
@@ -40,6 +56,11 @@
   .navbarTitleDisplay{
     display: block;
   }
+
+  .navIcons{
+    width: 20px;
+    height: 20px;
+   }
 
 
 @media (max-width: 550px) {

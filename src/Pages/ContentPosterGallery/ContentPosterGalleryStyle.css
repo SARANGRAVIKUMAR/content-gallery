@@ -1,3 +1,8 @@
+.appContainer{
+    overflow-y: 'auto';
+    margin-top: 60;
+   }
+
 .landing {
     background-color: #171717;
     width: 100%;

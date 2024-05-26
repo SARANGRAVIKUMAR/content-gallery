@@ -33,34 +33,33 @@ const NavBar = ({ title, handleContentSearch }: NavbarProps) => {
   };
 
   return (
-    <div className={`navBar ${scrolled ? 'scrolled' : 'stillScrollBar'}`}>
-      <div style={{ display: 'flex', flexDirection: 'column', width: '100%' }}>
+    <div className={`navBar ${scrolled ? 'bluredNavBar' : 'solidColorNavBar'}`}>
+      <div style={{ width: '100%' }}>
         <div
-          style={{
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'space-between',
-            width: '100%',
-          }}
+          className="navBarContents"
         >
-          <div style={{ display: 'flex', gap: 5, alignItems: 'center' }}>
+          <div className="navBarContents-left">
             <Button type="text" className="navButton">
               <img
                 src={backIcon}
                 alt="Back"
-                style={{ width: '20px', height: '20px' }}
+                className="navIcons"
               />
             </Button>
-            <span className={`title ${!showSearchIcon && 'navbarTitleDisplay'}`} style={{ whiteSpace: 'nowrap' }}>{title}</span>
+            <span
+              className={`title ${!showSearchIcon && 'navbarTitleDisplay'}`}
+              style={{ whiteSpace: 'nowrap' }}
+            >{title}
+            </span>
           </div>
-          <div style={{ display: 'flex', alignItems: 'center' }} className={`${!showSearchIcon && 'abcd'}`}>
+          <div className={`${!showSearchIcon && 'abcd'} navBarContents-right`}>
             {
               showSearchIcon ? (
                 <Button type="text" onClick={toggleSearchBarDisplay} className="navButton">
                   <img
                     src={searchIcon}
                     alt="Search"
-                    style={{ width: '20px', height: '20px' }}
+                    className="navIcons"
                   />
                 </Button>
               ) : (
@@ -72,7 +71,6 @@ const NavBar = ({ title, handleContentSearch }: NavbarProps) => {
                 </>
               )
             }
-
           </div>
         </div>
       </div>

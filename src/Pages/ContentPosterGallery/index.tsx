@@ -1,6 +1,6 @@
 /* eslint-disable import/extensions */
 /* eslint-disable import/no-unresolved */
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 
 import './ContentPosterGalleryStyle.css';
 import axios from 'axios';
@@ -9,15 +9,24 @@ import Constants from '../../Global/constants';
 import NavBar from '../../Components/Navbar';
 import altImage from '../../Assets/images/altImage.png';
 
-const InfiniteScrollExample1 = () => {
-  const [ContentItems, setContentItems] = useState<any>([]);
+const ContentPosterGallery = () => {
+  const [contentItems, setContentItems] = useState<any>([]);
   const [isContentLoading, setIsContentLoading] = useState(false);
   const [currentPage, setCurrentPage] = useState(Constants.defaultPageNumber);
   const [totalContents, setTotalContents] = useState(Constants.defaultPageSize);
   const [filteredContentList, setFilteredContentList] = useState<any>([]);
   const [contentTitle, setContentTitle] = useState('');
-  const [width, setWidth] = useState(window.innerWidth);
-  const [height, setHeight] = useState(window.innerHeight);
+  const cardRef = useRef<any>();
+
+  useEffect(() => {
+    // Page scroll to top on every reload
+    window.onload = () => {
+      window.scrollTo(0, 0);
+    };
+    return () => {
+      window.onload = null;
+    };
+  }, []);
 
   const fetchData = async () => {
     setIsContentLoading(true);
@@ -41,16 +50,18 @@ const InfiniteScrollExample1 = () => {
 
   // function to handle scroll event
   const handleScroll = () => {
+    // trigger scroll event when reached 80% of the screen
     const scrollPercentage = (window.scrollY
       / (document.documentElement.scrollHeight - window.innerHeight)) * 100;
     if (
-      scrollPercentage < 80
+      scrollPercentage < Constants.scrollEventTriggerEventPercentage
       || isContentLoading
-      || ContentItems.length >= totalContents
+      || contentItems.length >= totalContents
     ) {
       return;
     }
-    fetchData(); // Fetch more data when scrolled to the bottom
+    // Fetch more data when scrolled to the bottom
+    fetchData();
   };
 
   useEffect(() => {
@@ -64,46 +75,30 @@ const InfiniteScrollExample1 = () => {
   };
 
   const modifyRenderList = (searchText: string) => {
-    const filteredItems = ContentItems.filter(
+    const filteredItems = contentItems.filter(
       (item: any) => item.name.toLowerCase().includes(searchText),
     );
     setFilteredContentList(filteredItems);
   };
 
   const truncateString = (contentName: string) => {
-    // handling content string based on window size
-    if (width < height) {
-      // portrait
-      return contentName.length > width / 20 ? `${contentName.slice(0, width / 30)}...` : contentName;
-    }
-    // landscape
-    return contentName.length > width / 40 ? `${contentName.slice(0, width / 40)}...` : contentName;
+    const maxWidth = cardRef?.current?.clientWidth;
+    return contentName.length > maxWidth / 10 ? `${contentName.slice(0, maxWidth / 10)}...` : contentName;
   };
-
-  useEffect(() => {
-    const handleResize = () => {
-      setWidth(window.innerWidth);
-      setHeight(window.innerHeight);
-    };
-
-    window.addEventListener('resize', handleResize);
-
-    // Cleanup event listener on component unmount
-    return () => {
-      window.removeEventListener('resize', handleResize);
-    };
-  }, []);
 
   return (
     <>
-      <NavBar handleContentSearch={handleContentSearch} title={contentTitle} />
+      <NavBar
+        handleContentSearch={handleContentSearch}
+        title={contentTitle}
+      />
 
-      <div style={{ overflowY: 'auto', marginTop: 60 }}>
+      <div className="appContainer">
         {filteredContentList.length ? (
           <div className="grid-container">
             {filteredContentList.map((content: any, index: number) => (
               // eslint-disable-next-line react/no-array-index-key
-              <div className="grid-item" key={index}>
+              <div ref={cardRef} className="grid-item" key={index}>
                 <img
                   loading="lazy"
                   src={`${Constants.baseUrl}/images/${content['poster-image']}`}
@@ -125,4 +120,4 @@ const InfiniteScrollExample1 = () => {
   );
 };
 
-export default InfiniteScrollExample1;
+export default ContentPosterGallery;
