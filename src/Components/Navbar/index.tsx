@@ -66,7 +66,7 @@ const NavBar = ({ title, handleContentSearch }: NavbarProps) => {
                 <>
                   <Input size="middle" onChange={handleContentSearch} allowClear placeholder="Search Content" />
                   <Button type="text" onClick={toggleSearchBarDisplay} className="navButton">
-                    Cancel
+                    Cancel Search
                   </Button>
                 </>
               )
