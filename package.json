@@ -4,7 +4,6 @@
   "private": true,
   "dependencies": {
     "@craco/craco": "^6.2.0",
-    "@reduxjs/toolkit": "^1.9.1",
     "@testing-library/jest-dom": "^5.11.4",
     "@testing-library/react": "^11.1.0",
     "@types/jest": "^26.0.15",
@@ -15,10 +14,7 @@
     "antd": "^5.17.3",
     "axios": "^0.21.1",
     "craco-less": "~1.15.0",
-    "gh-pages": "^6.1.1",
     "lodash.debounce": "^4.0.8",
-    "mobx": "^6.3.2",
-    "mobx-react": "^7.2.0",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-router-dom": "^5.2.0",
