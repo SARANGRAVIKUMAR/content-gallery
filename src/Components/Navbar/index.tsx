@@ -1,5 +1,6 @@
 /* eslint-disable import/extensions */
 /* eslint-disable import/no-unresolved */
+/* eslint-disable no-unused-vars */
 import { Button, Input } from 'antd';
 import './navbar.css';
 import React, { useEffect, useState } from 'react';
@@ -9,10 +10,15 @@ import Constants from '../../Global/constants';
 
 interface NavbarProps {
   title: string,
-  handleContentSearch: any
+  handleContentSearch: any,
+  modifyRenderList: (searchTerm: string) => void;
 }
 
-const NavBar = ({ title, handleContentSearch }: NavbarProps) => {
+const NavBar = ({
+  title,
+  handleContentSearch,
+  modifyRenderList,
+}: NavbarProps) => {
   const [scrolled, setScrolled] = useState(false);
   const [showSearchIcon, setShowSearchIcon] = useState(true);
 
@@ -76,7 +82,10 @@ const NavBar = ({ title, handleContentSearch }: NavbarProps) => {
                   />
                   <Button
                     type="text"
-                    onClick={toggleSearchBarDisplay}
+                    onClick={() => {
+                      toggleSearchBarDisplay();
+                      modifyRenderList('');
+                    }}
                     className="navButton"
                   >
                     Cancel

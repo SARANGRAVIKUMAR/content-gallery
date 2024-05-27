@@ -80,7 +80,7 @@ const ContentPosterGallery = () => {
   }, [isContentLoading, searchItem]); // Re-add event listener if loading state changes
 
   const handleContentSearch = (event: any) => {
-    const searchText = event.target.value.toLowerCase().trim();
+    const searchText = event?.target?.value?.toLowerCase().trim();
     setSearchItem(searchText);
     modifyRenderList(searchText);
   };
@@ -110,6 +110,7 @@ const ContentPosterGallery = () => {
   return (
     <>
       <NavBar
+        modifyRenderList={modifyRenderList}
         handleContentSearch={handleContentSearch}
         title={contentTitle}
       />
