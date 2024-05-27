@@ -23,7 +23,7 @@ const NavBar = ({
   const [showSearchIcon, setShowSearchIcon] = useState(true);
 
   const handleScroll = () => {
-    if (window.scrollY > 0) {
+    if (window.scrollY > Constants.initalScrollPosition) {
       setScrolled(true);
     } else {
       setScrolled(false);
@@ -48,13 +48,25 @@ const NavBar = ({
           className="navBarContents"
         >
           <div className="navBarContents-left">
-            <Button type="text" className="navButton">
-              <img
-                src={backIcon}
-                alt="Back"
-                className="navIcons"
-              />
-            </Button>
+            {
+              !showSearchIcon && (
+                <Button
+                  onClick={() => {
+                    toggleSearchBarDisplay();
+                    modifyRenderList('');
+                  }}
+                  type="text"
+                  className="navButton showNavbarBackButton"
+                >
+                  <img
+                    src={backIcon}
+                    alt="Back"
+                    className="navIcons"
+                  />
+                </Button>
+              )
+            }
+
             <span
               className={`title ${!showSearchIcon && 'navbarTitleDisplay'}`}
               style={{ whiteSpace: 'nowrap' }}
@@ -86,7 +98,7 @@ const NavBar = ({
                       toggleSearchBarDisplay();
                       modifyRenderList('');
                     }}
-                    className="navButton"
+                    className="navButton showNavbarCancel"
                   >
                     Cancel
                   </Button>

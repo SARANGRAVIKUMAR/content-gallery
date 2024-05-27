@@ -92,7 +92,7 @@ const ContentPosterGallery = () => {
     setFilteredContentList(filteredItems);
   };
 
-  const truncateString = (str: string) => (str.length > windowWidth / 30 ? `${str.slice(0, windowWidth / 30)}...` : str);
+  const truncateString = (str: string) => (str.length > windowWidth / Constants.charactersPerViewportUnit ? `${str.slice(0, windowWidth / Constants.charactersPerViewportUnit)}...` : str);
 
   useEffect(() => {
     const handleResize = () => {

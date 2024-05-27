@@ -62,6 +62,12 @@
     height: 20px;
    }
 
+   .showNavbarCancel{
+    display: block;
+   }
+   .showNavbarBackButton{
+    display: none;
+   }
 
 @media (max-width: 550px) {
   .navbarTitleDisplay {
@@ -70,5 +76,10 @@
     .navBarContents-toggleView{
       flex: 1;
     }
-
+    .showNavbarCancel{
+       display: none;
+    }
+    .showNavbarBackButton{
+      display: block;
+    }
 }

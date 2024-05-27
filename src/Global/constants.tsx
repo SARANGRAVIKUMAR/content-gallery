@@ -5,7 +5,8 @@ const Constants = {
   debounceSeconds: 1000,
   scrollEventTriggerEventPercentage: 80,
   searchCharLimit: 20,
-
+  initalScrollPosition: 0,
+  charactersPerViewportUnit: 30,
 };
 
 export default Constants;
