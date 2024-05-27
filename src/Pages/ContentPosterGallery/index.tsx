@@ -43,10 +43,8 @@ const ContentPosterGallery = () => {
       setTotalContents(response?.data?.page['total-content-items']);
       setContentTitle(response?.data?.page?.title);
       if (searchItem) {
-        console.log('45');
         modifyRenderList(searchItem);
       } else {
-        console.log('insdie else');
         setFilteredContentList((prevItems: any) => [...prevItems, ...response?.data?.page['content-items'].content]);
       }
     } catch (error) {
@@ -55,8 +53,6 @@ const ContentPosterGallery = () => {
       setIsContentLoading(false);
     }
   };
-
-  console.log({ filteredContentList });
 
   useEffect(() => {
     fetchData();
@@ -95,8 +91,6 @@ const ContentPosterGallery = () => {
     );
     setFilteredContentList(filteredItems);
   };
-
-  console.log({ windowWidth });
 
   const truncateString = (str: string) => (str.length > windowWidth / 30 ? `${str.slice(0, windowWidth / 30)}...` : str);
 
@@ -139,7 +133,9 @@ const ContentPosterGallery = () => {
             ))}
           </div>
         ) : (
-          <Empty />
+          <div className="emptyContainer">
+            <Empty />
+          </div>
         )}
         {isContentLoading && <Skeleton />}
       </div>

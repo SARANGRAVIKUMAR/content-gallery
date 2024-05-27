@@ -3,6 +3,13 @@
     margin-top:60px;
    }
 
+   .emptyContainer{
+    margin-top: 100px;
+    .ant-empty-description{
+      color: #FFFFFF;
+    }
+  }
+
 .landing {
     background-color: #171717;
     width: 100%;
@@ -43,7 +50,7 @@
   .grid-item p {
     text-align: start;
     margin-top: 10px;
-    color: white;
+    color: #FFFFFF;
     font-size: 1em;
   }
   .landing {

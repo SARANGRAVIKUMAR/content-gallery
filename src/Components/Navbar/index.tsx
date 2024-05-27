@@ -1,8 +1,11 @@
+/* eslint-disable import/extensions */
+/* eslint-disable import/no-unresolved */
 import { Button, Input } from 'antd';
 import './navbar.css';
 import React, { useEffect, useState } from 'react';
 import backIcon from '../../Assets/icons/Back.png';
 import searchIcon from '../../Assets/icons/search.png';
+import Constants from '../../Global/constants';
 
 interface NavbarProps {
   title: string,
@@ -64,8 +67,18 @@ const NavBar = ({ title, handleContentSearch }: NavbarProps) => {
                 </Button>
               ) : (
                 <>
-                  <Input maxLength={20} size="middle" onChange={handleContentSearch} allowClear placeholder="Search Content" />
-                  <Button type="text" onClick={toggleSearchBarDisplay} className="navButton">
+                  <Input
+                    maxLength={Constants.searchCharLimit}
+                    size="middle"
+                    onChange={handleContentSearch}
+                    allowClear
+                    placeholder="Search Content"
+                  />
+                  <Button
+                    type="text"
+                    onClick={toggleSearchBarDisplay}
+                    className="navButton"
+                  >
                     Cancel
                   </Button>
                 </>

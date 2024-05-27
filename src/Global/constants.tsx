@@ -4,6 +4,8 @@ const Constants = {
   baseUrl: 'https://test.create.diagnal.com',
   debounceSeconds: 1000,
   scrollEventTriggerEventPercentage: 50,
+  searchCharLimit: 20,
+
 };
 
 export default Constants;

@@ -28,7 +28,7 @@
     border: none;
     cursor: pointer;
     font-size: 15px;
-    color: white;
+    color: #FFFFFF;
     padding: 10;
   }
   .navBarContents{
@@ -50,7 +50,7 @@
   
   .title {
     font-size: 22px;
-    color: white;
+    color: #FFFFFF;
   }
 
   .navbarTitleDisplay{
